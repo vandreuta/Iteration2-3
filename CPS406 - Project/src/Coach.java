@@ -1,5 +1,5 @@
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
+// import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -25,6 +25,8 @@ public class Coach extends User {
             System.out.println(readMember(counter, info));
             counter++;
         }
+
+        br.close();
     }
 
     private String readMember(int num, String[] info) {

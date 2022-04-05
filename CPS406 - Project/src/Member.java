@@ -4,8 +4,6 @@ public class Member extends User {
     private String password;
     private String email;
 
-
-
     public Member(String name, String memberId, String password, String email) {
         super(name, email);
         this.memberId = memberId;
