@@ -84,7 +84,6 @@ public class ClubApp {
 
 	}
 
-
 	/**
 	 * Method opens the existing users.csv file
 	 * Appends appropriate user info to the file separated by commas
