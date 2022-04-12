@@ -3,6 +3,8 @@
  */
 
 import java.io.*;
+// import java.util.ArrayList;
+// import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -10,9 +12,13 @@ public class ClubApp {
 	
 	public static void main(String[] args) {
 
+		boolean admin = false;
+		String user;
+
 		Scanner console = new Scanner(System.in);
-		System.out.print("\033\143");
+		//System.out.print("\033\143");
 		System.out.print(">");
+		
 
 		while (console.hasNextLine()) {
 			
@@ -48,7 +54,21 @@ public class ClubApp {
 			}
 
 			else if (command.equalsIgnoreCase("L")){
-				System.out.println("TODO: login existing account");
+
+				System.out.println("Enter username: ");
+				String username = console.nextLine();
+
+				System.out.println("Enter password: ");
+				String password = console.nextLine();
+				
+				try {
+					if(login(username, password)){
+						System.out.println("Welcome, " + username);
+						user = username;
+					}
+				} catch (Exception e) {	
+					e.printStackTrace();
+				}
 			}
 
 			else if (command.equalsIgnoreCase("Q")){
@@ -56,7 +76,7 @@ public class ClubApp {
 			}
 
 			commandLine.close();
-			System.out.print("\033\143");
+			//System.out.print("\033\143");
 			System.out.print("\n>");
 		}
 
@@ -70,7 +90,7 @@ public class ClubApp {
 	 * Appends appropriate user info to the file separated by commas
 	 * Returns true if successful
 	 * 
-	 * @param member
+	 * @param	member
 	 * @return	bool 
 	 */
 
@@ -117,5 +137,43 @@ public class ClubApp {
 		}
 
 		return id.toString();
+	}
+
+
+	/**
+	 * Checks that user exists in user database
+	 * 
+	 * @param username
+	 * @param password
+	 * @return Boolean	Indicating success or failure
+	 * @throws IOException
+	 */
+
+	public static boolean login(String username, String password) throws IOException{
+	
+		try {
+			BufferedReader r = new BufferedReader( new FileReader("src/users.csv"));
+			String line = null;
+
+			while ((line = r.readLine()) != null){
+				String[] curr_line = line.split(",");
+
+				for (int i = 0 ; i < curr_line.length; i+=4){
+
+					if ((curr_line[i].equals(username))||(curr_line[i+2].equals(password))){
+						r.close();
+						System.out.println("hello, " + username);
+						return true;
+					}
+				}
+			}
+
+			r.close();
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		return false;
 	}
 }
