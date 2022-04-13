@@ -1,5 +1,7 @@
 import java.util.HashMap;
 
+//TODO: Hard-code some features
+
 public class Treasurer extends User {
     
     private HashMap<String, Double> incomeList;
